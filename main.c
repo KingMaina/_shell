@@ -8,13 +8,13 @@
 int main(void)
 {
 	char *userCommand = NULL;
-	size_t userCommandSize = 0;
+	size_t userCommandSize = 0, numTokens = 0, i;
 	ssize_t bytesRead = 0;
+	char **tokens = NULL;
 
 	while (1)
 	{
 		prompt();
-		freeUserCommand(&userCommand, &userCommandSize);
 		bytesRead = getline(&userCommand, &userCommandSize, stdin);
 		if (bytesRead == -1)
 		{
@@ -22,6 +22,15 @@ int main(void)
 			freeUserCommand(&userCommand, &userCommandSize);
 			break;
 		}
+		if (userCommand[0] == '\n')
+			continue;
+		tokens = tokenize(userCommand, DELIM_TOKENS);
+		if (!tokens)
+			continue;
+		for (i = 0; tokens[i]; i++)
+			numTokens++;
+		freeUserCommand(&userCommand, &userCommandSize);
+		freeTokens(tokens);
 	}
 
 	return (EXIT_SUCCESS);

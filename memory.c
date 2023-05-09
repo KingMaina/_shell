@@ -16,3 +16,26 @@ void freeUserCommand(char **command, size_t *commandSize)
 	*command = NULL;
 	*commandSize = 0;
 }
+
+/**
+* freeTokens - De-allocates memory for a NULL-terminated
+* tokens array
+* @tokens: pointer to the token array
+*
+* Return: void
+*/
+void freeTokens(char **tokens)
+{
+	size_t i;
+
+	if (!tokens || !(*tokens))
+		return;
+	for (i = 0; tokens && tokens[i]; i++)
+	{
+		free(tokens[i]);
+		tokens[i] = NULL;
+	}
+	free(tokens);
+	tokens = NULL;
+}
+
