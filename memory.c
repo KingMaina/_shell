@@ -39,3 +39,30 @@ void freeTokens(char **tokens)
 	tokens = NULL;
 }
 
+/**
+* freeDirectoryPathsList - De-allocates memory from
+* a dir_paths linked list
+* @head: Double pointer to the head of the linked list
+*
+* Return: void
+*/
+void freeDirectoryPathsList(dir_paths **head)
+{
+	dir_paths *currentNode = NULL, *nextNode = NULL;
+
+	currentNode = *head;
+	nextNode = (*head)->next;
+	for (; nextNode;)
+	{
+		free(currentNode->directoryPath);
+		currentNode->directoryPath = NULL;
+		free(currentNode);
+		currentNode = nextNode;
+		nextNode = nextNode->next;
+	}
+	free(currentNode->directoryPath);
+	currentNode->directoryPath = NULL;
+	free(currentNode);
+	currentNode = NULL;
+	*head = NULL;
+}
