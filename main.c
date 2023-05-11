@@ -2,17 +2,20 @@
 
 /**
 * main - Application entry
+* argc - The number of arguments passed to the application
+* argv: A NULL terminated array list of the program's arguments
 *
 * Return: 0 on success, non-zero on error
 */
-int main(void)
+int main(int argc, char **argv)
 {
 	char *userCommand = NULL;
-	size_t userCommandSize = 0, numTokens = 0, i;
+	size_t userCommandSize = 0;
 	ssize_t bytesRead = 0;
 	char **tokens = NULL;
+	char *progName = NULL;
 
-	while (1)
+	while (argc && 1)
 	{
 		prompt();
 		bytesRead = getline(&userCommand, &userCommandSize, stdin);
@@ -25,10 +28,21 @@ int main(void)
 		if (userCommand[0] == '\n')
 			continue;
 		tokens = tokenize(userCommand, DELIM_TOKENS);
-		if (!tokens)
+		if (!tokens || !(*tokens))
+		{
+			freeUserCommand(&userCommand, &userCommandSize);
+			freeTokens(tokens);
 			continue;
-		for (i = 0; tokens[i]; i++)
-			numTokens++;
+		}
+		progName = getProgramPath(tokens[0]);
+		if (!progName)
+		{
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], tokens[0]);
+			freeUserCommand(&userCommand, &userCommandSize);
+			freeTokens(tokens);
+			continue;
+		}
+		free(progName);
 		freeUserCommand(&userCommand, &userCommandSize);
 		freeTokens(tokens);
 	}
