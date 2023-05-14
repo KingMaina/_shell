@@ -108,6 +108,7 @@ char *getPathFromEnv(char *envPathValue, char *programName)
 		memcpy(programPath + dirPathLen + 1, programName, programNameLen + 1);
 		if (isProgramPath(programPath))
 		{
+			printf("New Path: %s\n", programPath);
 			freeDirectoryPathsList(&head);
 			return (programPath);
 		}
