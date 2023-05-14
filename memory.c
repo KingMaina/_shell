@@ -28,7 +28,7 @@ void freeTokens(char **tokens)
 {
 	size_t i;
 
-	if (!tokens || !(*tokens))
+	if (!tokens)
 		return;
 	for (i = 0; tokens && tokens[i]; i++)
 	{
