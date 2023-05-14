@@ -2,8 +2,8 @@
 
 /**
 * main - Application entry
-* argc - The number of arguments passed to the application
-* argv: A NULL terminated array list of the program's arguments
+* @argc: The number of arguments passed to the application
+* @argv: A NULL terminated array list of the program's arguments
 *
 * Return: 0 on success, non-zero on error
 */
@@ -42,7 +42,8 @@ int main(int argc, char **argv)
 			freeTokens(tokens);
 			continue;
 		}
-		free(progName);
+		free(tokens[0]);
+		tokens[0] = progName;
 		freeUserCommand(&userCommand, &userCommandSize);
 		freeTokens(tokens);
 	}
