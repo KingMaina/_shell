@@ -4,10 +4,11 @@
 * main - Application entry
 * @argc: The number of arguments passed to the application
 * @argv: A NULL terminated array list of the program's arguments
+* @env: A NULL terminated list of the process's environment variables
 *
 * Return: 0 on success, non-zero on error
 */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	char *userCommand = NULL;
 	size_t userCommandSize = 0;
@@ -28,7 +29,7 @@ int main(int argc, char **argv)
 		if (userCommand[0] == '\n')
 			continue;
 		tokens = tokenize(userCommand, DELIM_TOKENS);
-		if (!tokens || !(*tokens))
+		if (!tokens)
 		{
 			freeUserCommand(&userCommand, &userCommandSize);
 			freeTokens(tokens);
@@ -44,9 +45,11 @@ int main(int argc, char **argv)
 		}
 		free(tokens[0]);
 		tokens[0] = progName;
+		execute_command(tokens, env);
 		freeUserCommand(&userCommand, &userCommandSize);
 		freeTokens(tokens);
 	}
 
 	return (EXIT_SUCCESS);
 }
+

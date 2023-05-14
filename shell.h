@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 /* Constants */
 #define BUFFER_SIZE 1024
@@ -39,6 +40,7 @@ int isProgramPath(char *programPath);
 char *getProgramPath(char *programName);
 dir_paths *addNodeBegin(dir_paths **head, char *dirPath);
 char *getPathFromEnv(char *envPathValue, char *programName);
+void execute_command(char **args, char **env);
 
 /* De-allocate memory*/
 void freeTokens(char **tokens);
