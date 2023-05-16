@@ -18,7 +18,7 @@ This is a shell program that reads user commands, parses them and executes the c
 All commands described below assume you are familiar with linux, interacting with the command line and is using a unix shell like `sh`, `bash`, `zsh` etc. in a unix-like  variant system such as Linux, Ubuntu etc.
 Be sure to check out how to [Setup](#project-setup) the project environment then check out the [Example](#3-example) section to see how to interact with the shell.
 
-## Project Setup⛏ {#project-setup}
+## Project Setup⛏
 
 ![VIM](https://img.shields.io/badge/VIM-%2311AB00.svg?&style=for-the-badge&logo=vim&logoColor=white)
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
@@ -32,7 +32,7 @@ If you are on linux or similar supported UNIX OS:
  - `docker` - For creating and running the shell in a containerised environment.
 
 
-## 1. Compile project files {#compile-project-files}
+## 1. Compile project file
 
 Once you have cloned the repository, compile the program using the code below:
 
@@ -55,7 +55,7 @@ gcc -Wall -Werror -Wextra -pedantic -std-gnu89 *.c -o my_shell # or gcc <flags> 
 For more on learning how to use the debugger, visit the official docs at [gdb docs](https://sourceware.org/gdb/current/onlinedocs/gdb.html/)
 
 
-## 2. Run the shell {#2-run-the-shell}
+## 2. Run the shell
 ### i. Locally
 
 To run the shell program in interactive mode:
@@ -82,7 +82,7 @@ docker run -it --rm --name my_shell shell_image
 	- `--name` gives the container a name; In this case, we call it `my_shell`.
 3. Write simple commands in the prompt once the container is running
 
-## 3. Example📝 {#3-example}
+## 3. Example📝
 List the directory's contents excluding hidden files and directories (defaults to the current directory as no target directory has been specified). 
 ```sh
 $ ls -la # or /bin/ls -l
@@ -97,7 +97,7 @@ To exit the shell, issue a Ctrl-D command to indicate an EOF signal and terminat
 If used while you have launched valgrind, it will terminate the shell program running in valgrind first and give a summary of memory usage, then prompt the user again for a command. Press Ctrl-D again to terminate the shell.
 > This is temporary for now as built-in commands such as `exit` to **exit** the shell have not been implemented yet.
 
-## 4. Using Valgrind {#4-using-valgrind}
+## 4. Using Valgrind
 
 If you want to check the heap memory usage of the application, run using the compiled shell program `my_shell` or the debugging executable file `d_my_shell`.
 You can use valgrind from your local environment if you have installed it or you can use the one installed in the container. You can access it through the interactive shell as follows:
@@ -105,7 +105,7 @@ You can use valgrind from your local environment if you have installed it or you
 $ valgrind ./my_shell ## or valgrind ./d_my_shell
 ```
 
-## 5.Give Feedback🔄 {#5-give-feedback}
+## 5.Give Feedback🔄
 
 ![Ask Me Anything](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)
 
