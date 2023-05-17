@@ -1,4 +1,4 @@
-# 🚀UNIX SHELL PROGRAM🚀
+# **🚀UNIX SHELL PROGRAM🚀**
 
 This will be a simple project aimed at building a simple UNIX shell program using the C programming language.
 
@@ -6,10 +6,16 @@ This will be a simple project aimed at building a simple UNIX shell program usin
 ## WHAT'S NEW🚀
 
 The shell executes simple commands and works in a Read-Execute-Print-Loop (REPL) manner.
-The shell however cannot execute complex commands such as:
+1. Simple shell commands such as `echo "Hello"`, `ls -la /var/tmp`
+
+
+## Work in progress
+The following features will be introduced in future versions:
 1. Built-in commands like `cd`, `alias`.
 2. Logical properties such as `||` and `&&`.
-3. I/O redirection i.e. `>`, `<` or `>>`
+3. I/O redirection i.e. `>`, `<` or `>>`.
+4. Navigation using arrow keys (The cursor currently does not move when you press up, down, left, right etc).
+5. Shell history.
 
 
 ## Description📜
@@ -34,15 +40,17 @@ If you are on linux or similar supported UNIX OS:
 
 ## 1. Compile project file
 
-Once you have cloned the repository, compile the program using the code below:
-
+Once you have cloned the repository, change directory into the repo directory and compile the program using the code below:
 ```sh
-gcc main.c prompt.c -o my_shell # or gcc *.c -o my_shell
+cd _shell/ # Change into the directory context
+```
+```sh
+gcc *.c -o my_shell
 ```
 
 To compile the code for debugging with gdb, add the `-g` flag to compile into a form that can be used by the debugger.
 ```sh
-gcc main.c prompt.c -g -o d_my_shell
+gcc *.c -g -o d_my_shell
 ```
 and run the debugger:
 ```sh
@@ -50,7 +58,7 @@ gdb ./d_myshell
 ```
 You can add optional flags to use various gcc features such as compliance to specific C standards or issue warnings and errors in the compilation process.
 ```sh
-gcc -Wall -Werror -Wextra -pedantic -std-gnu89 *.c -o my_shell # or gcc <flags> -g -o d_my_shell for debugging as well
+gcc -Wall -Werror -Wextra -pedantic -std-gnu89 *.c -o my_shell
 ```
 For more on learning how to use the debugger, visit the official docs at [gdb docs](https://sourceware.org/gdb/current/onlinedocs/gdb.html/)
 
@@ -66,6 +74,7 @@ Enter commands on the standard output, keyboard by default, using the format:
 ```sh
 $ <command_name> [...arguments]
 ```
+See [examples](#3-example) section below.
 
 ### ii. Docker
 
@@ -77,8 +86,10 @@ docker build -t shell_image .
 ```sh
 docker run -it --rm --name my_shell shell_image
 ```
-	- `-it` instructs docker to provide you with an interactive shell inside the container so that you can execute commands.
-	- `--rm` tells docker to delete the contaier once it stops running, otherwise you have to delete the container manually using `docker rm <container name or hash>`
+	- `-it` instructs docker to provide you with an interactive shell inside the container so
+	that you can execute commands.
+	- `--rm` tells docker to delete the contaier once it stops running, otherwise you have to
+	delete the container manually using `docker rm <container name or hash>`
 	- `--name` gives the container a name; In this case, we call it `my_shell`.
 3. Write simple commands in the prompt once the container is running
 
@@ -93,17 +104,18 @@ but not complex commands such as:
 ```sh
 $ echo "Hello World" > hello.txt && cat hello.txt
 ```
-To exit the shell, issue a Ctrl-D command to indicate an EOF signal and terminate the shell program. This can be done while running the shell locally or using the container.
+To exit the shell, issue a `Ctrl-D`/`EOF` signal and terminate the shell program. This can be done while running the shell locally or using the docker container.
 If used while you have launched valgrind, it will terminate the shell program running in valgrind first and give a summary of memory usage, then prompt the user again for a command. Press Ctrl-D again to terminate the shell.
 > This is temporary for now as built-in commands such as `exit` to **exit** the shell have not been implemented yet.
 
-## 4. Using Valgrind
+## 4. Memory check with Valgrind
 
 If you want to check the heap memory usage of the application, run using the compiled shell program `my_shell` or the debugging executable file `d_my_shell`.
 You can use valgrind from your local environment if you have installed it or you can use the one installed in the container. You can access it through the interactive shell as follows:
 ```sh
 $ valgrind ./my_shell ## or valgrind ./d_my_shell
 ```
+Once it launches, issue commands from the terminal prompt just like you would in any other shell program. See [examples](#3-example) above.
 
 ## 5.Give Feedback🔄
 
