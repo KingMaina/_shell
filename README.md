@@ -1,4 +1,4 @@
-# **🚀UNIX SHELL PROGRAM🚀**
+# **👾UNIX SHELL PROGRAM👾**
 
 This will be a simple project aimed at building a simple UNIX shell program using the C programming language.
 
@@ -72,13 +72,13 @@ To run the shell program in interactive mode:
 ```
 Enter commands on the standard output, keyboard by default, using the format:
 ```sh
-$ <command_name> [...arguments]
+$ <command_name> [...arguments] # The text you are currently reading is a comment and will be ignored
 ```
 See [examples](#3-example) section below.
 
 ### ii. Docker
 
-1. Build the docker image. The `Dockerfile.dev` file in the current directory will be used because we specify `.` as the path.
+1. Build the docker image. The `Dockerfile` file in the current directory will be used because we specify `.` as the path.
 ```sh
 docker build -t shell_image .
 ```
@@ -96,7 +96,7 @@ docker run -it --rm --name my_shell shell_image
 ## 3. Example📝
 List the directory's contents excluding hidden files and directories (defaults to the current directory as no target directory has been specified). 
 ```sh
-$ ls -la # or /bin/ls -l
+$ ls . # or /bin/ls .
 d_my_shell     execute.c  main.c    my_shell  README.md  shell.h
 environment.c  LICENSE    memory.c  prompt.c  search.c   tokenize.c
 ```
@@ -104,7 +104,7 @@ but not complex commands such as:
 ```sh
 $ echo "Hello World" > hello.txt && cat hello.txt
 ```
-To exit the shell, issue a `Ctrl-D`/`EOF` signal and terminate the shell program. This can be done while running the shell locally or using the docker container.
+To exit the shell, press ctrl-d to issue a `Ctrl-D`/`EOF` signal and terminate the shell program. This can be done while running the shell locally or using the docker container.
 If used while you have launched valgrind, it will terminate the shell program running in valgrind first and give a summary of memory usage, then prompt the user again for a command. Press Ctrl-D again to terminate the shell.
 > This is temporary for now as built-in commands such as `exit` to **exit** the shell have not been implemented yet.
 
